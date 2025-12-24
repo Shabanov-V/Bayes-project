@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Header } from './components/Header';
+import { Hero } from './components/Hero';
+import { Card } from './components/Card';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Header />
+      <main>
+        <Hero />
+
+        <section className="container" style={{ padding: 'var(--space-8) 0' }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: 'var(--space-4)'
+          }}>
+            <Card
+              title="Modern Stack"
+              description="Built with Vite, React 18, and TypeScript for a robust development experience."
+            />
+            <Card
+              title="Premium Design"
+              description="Styled with Vanilla CSS variables for easy theming and dark mode support."
+            />
+            <Card
+              title="Extensible"
+              description="A clean component structure that's easy to build upon and scale."
+            />
+          </div>
+        </section>
+      </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
