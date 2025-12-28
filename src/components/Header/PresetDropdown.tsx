@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BUILT_IN_PRESETS } from '../../lib/presets';
 import { ScenarioState } from '../../types';
 
@@ -38,7 +38,7 @@ export function PresetDropdown({ userScenarios, onLoad, onDelete }: PresetDropdo
         Load Scenario ▾
       </button>
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-64 bg-surface rounded-lg shadow-lg">
+        <div className="absolute right-0 mt-2 w-64 bg-surface rounded-lg shadow-lg z-50">
           <div className="p-2">
             <h3 className="text-sm font-bold text-gray-400">Example Scenarios</h3>
             {BUILT_IN_PRESETS.map((preset) => (

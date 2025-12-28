@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import { HypothesisCard } from './components/HypothesisPanel/HypothesisCard';
 import { useScenario } from './hooks/useScenario';
 import { useCalculations } from './hooks/useCalculations';
@@ -90,7 +90,7 @@ function App() {
         </div>
       </header>
       <main className="p-4 sm:p-8 max-w-4xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-center items-stretch mb-8 gap-4 sm:gap-8">
+        <div className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-4 -mx-4 px-4 sm:-mx-8 sm:px-8 border-b border-border/40 shadow-sm flex flex-col md:flex-row justify-center items-stretch mb-8 gap-4 sm:gap-8 transition-all">
           <HypothesisCard
             text={state.hypotheses.h1}
             onTextChange={(value) =>

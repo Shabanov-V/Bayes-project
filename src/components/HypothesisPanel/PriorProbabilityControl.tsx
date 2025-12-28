@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Slider } from '../UI/Slider';
 import { Tooltip } from '../UI/Tooltip';
 
