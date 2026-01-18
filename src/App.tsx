@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback, useState, useRef } from 'react';
 import { HypothesisCard } from './components/HypothesisPanel/HypothesisCard';
 import { useScenario } from './hooks/useScenario';
 import { useCalculations } from './hooks/useCalculations';
@@ -21,6 +21,7 @@ function App() {
   const { h1Probability, h2Probability, steps } = useCalculations(state);
   const { addToast } = useToast();
   const [isHelpVisible, setIsHelpVisible] = useState(false);
+  const initialized = useRef(false);
 
   const [isCompact, setIsCompact] = useState(false);
 
@@ -42,6 +43,9 @@ function App() {
 
   // Load scenario on initial render
   useEffect(() => {
+    if (initialized.current) return;
+    initialized.current = true;
+
     const urlParams = new URLSearchParams(window.location.search);
     const scenarioParam = urlParams.get('scenario');
 
