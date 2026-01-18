@@ -22,6 +22,18 @@ function App() {
   const { addToast } = useToast();
   const [isHelpVisible, setIsHelpVisible] = useState(false);
 
+  const [isCompact, setIsCompact] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setIsCompact(scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   // Auto-save the current scenario to local storage on state change
   const debouncedSave = useCallback(debounce(saveScenario, 500), []);
   useEffect(() => {
@@ -90,7 +102,10 @@ function App() {
         </div>
       </header>
       <main className="p-4 sm:p-8 max-w-4xl mx-auto">
-        <div className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-4 -mx-4 px-4 sm:-mx-8 sm:px-8 border-b border-border/40 shadow-sm flex flex-col md:flex-row justify-center items-stretch mb-8 gap-4 sm:gap-8 transition-all">
+        <div
+          className={`sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 -mx-4 px-4 sm:-mx-8 sm:px-8 border-b border-border/40 shadow-sm flex flex-col md:flex-row justify-center items-stretch mb-8 gap-4 sm:gap-8 transition-all duration-300 ${isCompact ? 'py-2' : 'py-4'
+            }`}
+        >
           <HypothesisCard
             text={state.hypotheses.h1}
             onTextChange={(value) =>
@@ -98,8 +113,9 @@ function App() {
             }
             color="blue"
             probability={h1Probability}
+            isCompact={isCompact}
           />
-          <div className="text-2xl self-center">vs</div>
+          <div className={`text-2xl self-center transition-all duration-300 ${isCompact ? 'scale-75' : 'scale-100'}`}>vs</div>
           <HypothesisCard
             text={state.hypotheses.h2}
             onTextChange={(value) =>
@@ -107,6 +123,7 @@ function App() {
             }
             color="purple"
             probability={h2Probability}
+            isCompact={isCompact}
           />
         </div>
         <PriorProbabilityControl
